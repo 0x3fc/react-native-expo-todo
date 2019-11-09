@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
     textDecorationLine: "line-through",
   },
   incomplete: {},
-  containerStyle: { borderWidth: 0 },
+  containerStyle: {
+    borderWidth: 0,
+    backgroundColor: "transparent",
+  },
 });
 
 export default TodoItem;

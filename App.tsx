@@ -1,4 +1,5 @@
 import * as Font from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { Theme, ThemeProvider } from "react-native-elements";
@@ -28,6 +29,8 @@ const theme: Theme = {
   },
 };
 
+const gradientColors = ["transparent", "rgba(0, 0, 0, 0.1)"];
+
 const App: React.FC = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [tasks, setTasks] = useState<ITask[]>(initialState);
@@ -47,9 +50,15 @@ const App: React.FC = () => {
     fontLoaded && (
       <ThemeProvider theme={theme}>
         <SafeAreaView style={styles.container}>
-          <View style={styles.todo}>
-            <Todo tasks={tasks} setTasks={setTasks} />
-          </View>
+          <LinearGradient
+            start={[0.5, 0.85]}
+            colors={gradientColors}
+            style={styles.gradient}
+          >
+            <View style={styles.todo}>
+              <Todo tasks={tasks} setTasks={setTasks} />
+            </View>
+          </LinearGradient>
         </SafeAreaView>
       </ThemeProvider>
     )
@@ -60,6 +69,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f9f9f9",
+  },
+  gradient: {
+    flex: 1,
   },
   todo: {
     marginTop: 20,

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
 import TodoItem from "./TodoItem";
 
@@ -25,13 +25,15 @@ const Todo: React.FC<IProps> = ({ tasks, setTasks }) => {
       <View>
         <Text h1>Today</Text>
       </View>
-      {tasks.map(task => (
-        <TodoItem
-          key={task.id}
-          task={task}
-          onPress={() => setTasks(toggleTaskComplete(task.id, tasks))}
-        />
-      ))}
+      <ScrollView>
+        {tasks.map(task => (
+          <TodoItem
+            key={task.id}
+            task={task}
+            onPress={() => setTasks(toggleTaskComplete(task.id, tasks))}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };

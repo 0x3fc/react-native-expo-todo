@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-elements";
 import TodoItem from "./TodoItem";
 
 export interface ITask {
@@ -22,7 +23,7 @@ const Todo: React.FC<IProps> = ({ tasks, setTasks }) => {
   return (
     <View>
       <View>
-        <Text style={styles.header}>Today</Text>
+        <Text h1>Today</Text>
       </View>
       {tasks.map(task => (
         <TodoItem
@@ -35,13 +36,6 @@ const Todo: React.FC<IProps> = ({ tasks, setTasks }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 30,
-    fontWeight: "400",
-    marginVertical: 20,
-    marginHorizontal: 15,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default Todo;

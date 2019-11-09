@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import * as Font from "expo-font";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { Theme, ThemeProvider } from "react-native-elements";
 import Todo, { ITask } from "./components/Todo/Todo";
@@ -13,19 +14,45 @@ const theme: Theme = {
   colors: {
     primary: "#6d46f3",
   },
+  Text: {
+    h1Style: {
+      fontSize: 30,
+      marginVertical: 20,
+      marginHorizontal: 15,
+      letterSpacing: 1,
+      fontFamily: "nunito",
+    },
+    style: {
+      fontFamily: "nunito",
+    },
+  },
 };
 
 const App: React.FC = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
   const [tasks, setTasks] = useState<ITask[]>(initialState);
 
+  const loadFont = useCallback(async () => {
+    await Font.loadAsync({
+      nunito: require("./assets/fonts/Nunito-Regular.ttf"),
+    });
+    setFontLoaded(true);
+  }, [setFontLoaded]);
+
+  useEffect(() => {
+    loadFont();
+  }, []);
+
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.todo}>
-          <Todo tasks={tasks} setTasks={setTasks} />
-        </View>
-      </SafeAreaView>
-    </ThemeProvider>
+    fontLoaded && (
+      <ThemeProvider theme={theme}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.todo}>
+            <Todo tasks={tasks} setTasks={setTasks} />
+          </View>
+        </SafeAreaView>
+      </ThemeProvider>
+    )
   );
 };
 

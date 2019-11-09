@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   },
   todo: {
     marginTop: 20,
+    flex: 1,
   },
 });
 

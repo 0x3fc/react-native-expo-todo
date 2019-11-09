@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
+import { Theme, ThemeProvider } from "react-native-elements";
 import Todo, { ITask } from "./components/Todo/Todo";
 
 const initialState: ITask[] = [
@@ -8,15 +9,23 @@ const initialState: ITask[] = [
   { id: "uuid-3", name: "Study for midterm", completed: true },
 ];
 
+const theme: Theme = {
+  colors: {
+    primary: "#6d46f3",
+  },
+};
+
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<ITask[]>(initialState);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.todo}>
-        <Todo tasks={tasks} setTasks={setTasks} />
-      </View>
-    </SafeAreaView>
+    <ThemeProvider theme={theme}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.todo}>
+          <Todo tasks={tasks} setTasks={setTasks} />
+        </View>
+      </SafeAreaView>
+    </ThemeProvider>
   );
 };
 

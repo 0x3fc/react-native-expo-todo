@@ -1,19 +1,33 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import Todo, { ITask } from "./components/Todo/Todo";
 
-export default function App() {
+const initialState: ITask[] = [
+  { id: "uuid-1", name: "Complete todo app", completed: false },
+  { id: "uuid-2", name: "Sleep", completed: false },
+  { id: "uuid-3", name: "Study for midterm", completed: true },
+];
+
+const App: React.FC = () => {
+  const [tasks, setTasks] = useState<ITask[]>(initialState);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.todo}>
+        <Todo tasks={tasks} setTasks={setTasks} />
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#f9f9f9",
+  },
+  todo: {
+    marginTop: 20,
   },
 });
+
+export default App;

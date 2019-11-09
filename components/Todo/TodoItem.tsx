@@ -14,9 +14,8 @@ const TodoItem: React.FC<IProps> = ({ task, onPress }) => {
       <CheckBox
         title={task.name}
         checked={task.completed}
-        textStyle={
-          task.completed ? styles.itemCompleted : styles.itemIncompleted
-        }
+        textStyle={task.completed ? styles.completed : styles.incomplete}
+        containerStyle={styles.containerStyle}
         onPress={onPress}
       />
     </View>
@@ -24,11 +23,12 @@ const TodoItem: React.FC<IProps> = ({ task, onPress }) => {
 };
 
 const styles = StyleSheet.create({
-  itemCompleted: {
+  completed: {
     color: "#aaa",
     textDecorationLine: "line-through",
   },
-  itemIncompleted: {},
+  incomplete: {},
+  containerStyle: { borderWidth: 0 },
 });
 
 export default TodoItem;

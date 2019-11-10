@@ -1,5 +1,11 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ITask } from "../components/Todo/Todo";
+
+export interface ITask {
+  id: string;
+  name: string;
+  completed: boolean;
+  createdAt: number;
+}
 
 @Entity("task")
 export class Task extends BaseEntity implements ITask {
@@ -10,5 +16,8 @@ export class Task extends BaseEntity implements ITask {
   name: string;
 
   @Column("boolean")
-  completed: boolean;
+  completed = false;
+
+  @Column("int")
+  createdAt = Date.now();
 }

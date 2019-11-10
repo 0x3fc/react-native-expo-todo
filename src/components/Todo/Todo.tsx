@@ -1,14 +1,9 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
+import { ITask } from "../../models/Task";
 import NewTodo from "./NewTodo";
 import TodoItem from "./TodoItem";
-
-export interface ITask {
-  id: string;
-  name: string;
-  completed: boolean;
-}
 
 interface IProps {
   tasks: ITask[];

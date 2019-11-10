@@ -1,13 +1,12 @@
 import * as SQLite from "expo-sqlite";
 import { useCallback, useEffect, useState } from "react";
-import { ITask } from "../components/Todo/Todo";
-import { Task } from "../models/Task";
+import { ITask, Task } from "../models/Task";
 
 (window as any).Expo = Object.freeze({ ...(window as any).Expo, SQLite });
 
 const getInitialTasks = async (
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
-) => setTasks(await Task.find());
+) => setTasks(await Task.find({ order: { createdAt: "DESC" } }));
 
 export const useTask = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -20,7 +19,6 @@ export const useTask = () => {
     async (name: string) => {
       const task = new Task();
       task.name = name;
-      task.completed = false;
       await task.save();
       setTasks([task, ...tasks]);
     },

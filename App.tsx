@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const load = async () => {
     await createConnection({
       type: "expo",
-      database: "test",
+      database: "todo",
       synchronize: true,
       entities: [Task],
     });

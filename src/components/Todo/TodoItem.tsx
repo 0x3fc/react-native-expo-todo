@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { CheckBox } from "react-native-elements";
-import { ITask } from "./Todo";
+import { ITask } from "../../models/Task";
 
 interface IProps {
   task: ITask;

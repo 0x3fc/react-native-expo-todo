@@ -3,7 +3,6 @@ import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { Theme, ThemeProvider } from "react-native-elements";
 import Todo from "./components/Todo/Todo";
-import { useTask } from "./hooks/useTask";
 
 const theme: Theme = {
   colors: {
@@ -26,8 +25,6 @@ const theme: Theme = {
 const gradientColors = ["transparent", "rgba(0, 0, 0, 0.1)"];
 
 const Root: React.FC = () => {
-  const { tasks, pushNewTask, toggleTaskComplete } = useTask();
-
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaView style={styles.container}>
@@ -37,11 +34,7 @@ const Root: React.FC = () => {
           style={styles.gradient}
         >
           <View style={styles.todo}>
-            <Todo
-              tasks={tasks}
-              pushNewTask={pushNewTask}
-              toggleTaskComplete={toggleTaskComplete}
-            />
+            <Todo />
           </View>
         </LinearGradient>
       </SafeAreaView>

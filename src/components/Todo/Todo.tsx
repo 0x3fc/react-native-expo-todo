@@ -1,32 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
-import { ITask } from "../../models/Task";
+import { useTask } from "../../hooks/useTask";
 import NewTodo from "./NewTodo";
 import TodoItem from "./TodoItem";
 
-interface IProps {
-  tasks: ITask[];
-  pushNewTask: (name: string) => void;
-  toggleTaskComplete: (id: string) => void;
-}
+const Todo: React.FC = () => {
+  const { tasks, pushNewTask, toggleTaskComplete, removeTask } = useTask();
+  const [scrollEnabled, setScrollEnabled] = useState(false);
 
-const Todo: React.FC<IProps> = ({ tasks, pushNewTask, toggleTaskComplete }) => {
   return (
     <View style={styles.todo}>
       <View>
-        <Text h1>Today</Text>
+        <Text h1>Todo</Text>
       </View>
       <View>
         <NewTodo onSubmitEditing={pushNewTask} />
       </View>
       <View style={styles.scroll}>
-        <ScrollView>
+        <ScrollView scrollEnabled={scrollEnabled}>
           {tasks.map(task => (
             <TodoItem
               key={task.id}
               task={task}
               onPress={() => toggleTaskComplete(task.id)}
+              setScrollEnabled={setScrollEnabled}
+              removeTask={removeTask}
             />
           ))}
         </ScrollView>

@@ -40,5 +40,14 @@ export const useTask = () => {
     [setTasks, tasks]
   );
 
-  return { tasks, pushNewTask, toggleTaskComplete };
+  const removeTask = useCallback(
+    async (id: string) => {
+      const task = await Task.findOne(id);
+      await task.remove();
+      setTasks(tasks.filter(task => task.id !== id));
+    },
+    [setTasks, tasks]
+  );
+
+  return { tasks, pushNewTask, toggleTaskComplete, removeTask };
 };
